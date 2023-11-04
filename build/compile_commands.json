@@ -1,0 +1,170 @@
+[
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/tutos/tuto7_camera.cpp.o -c /home/duskel/Documents/Github/gkit2light/tutos/tuto7_camera.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/tutos/tuto7_camera.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/tutos/tuto7_camera.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/app.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/app.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/app.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/app.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/app_camera.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/app_camera.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/app_camera.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/app_camera.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/app_time.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/app_time.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/app_time.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/app_time.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/cgltf.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/cgltf.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/cgltf.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/cgltf.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/color.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/color.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/color.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/color.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/draw.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/draw.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/draw.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/draw.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/envmap.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/envmap.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/envmap.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/envmap.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/files.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/files.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/files.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/files.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/framebuffer.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/framebuffer.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/framebuffer.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/framebuffer.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/gamepads.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/gamepads.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/gamepads.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/gamepads.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/gltf.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/gltf.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/gltf.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/gltf.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/image.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/image.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/image.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/image.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/image_hdr.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/image_hdr.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/image_hdr.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/image_hdr.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/image_io.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/image_io.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/image_io.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/image_io.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/mat.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/mat.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/mat.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/mat.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/mesh.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/mesh.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/mesh.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/mesh.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/orbiter.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/orbiter.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/orbiter.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/orbiter.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/program.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/program.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/program.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/program.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/rgbe.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/rgbe.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/rgbe.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/rgbe.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/text.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/text.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/text.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/text.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/texture.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/texture.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/texture.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/texture.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/uniforms.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/uniforms.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/uniforms.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/uniforms.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/vec.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/vec.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/vec.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/vec.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/wavefront.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/wavefront.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/wavefront.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/wavefront.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/wavefront_fast.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/wavefront_fast.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/wavefront_fast.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/wavefront_fast.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/widgets.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/widgets.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/widgets.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/widgets.cpp.o"
+},
+{
+  "directory": "/home/duskel/Documents/Github/gkit2light/build",
+  "command": "/usr/bin/g++ -I/home/duskel/Documents/Github/gkit2light/src/gKit -g -std=gnu++11 -o CMakeFiles/tuto7_camera.dir/src/gKit/window.cpp.o -c /home/duskel/Documents/Github/gkit2light/src/gKit/window.cpp",
+  "file": "/home/duskel/Documents/Github/gkit2light/src/gKit/window.cpp",
+  "output": "CMakeFiles/tuto7_camera.dir/src/gKit/window.cpp.o"
+}
+]
