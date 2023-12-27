@@ -14,7 +14,7 @@ ifeq ($(config),debug)
   RESCOMP = windres
   TARGETDIR = bin
   TARGET = $(TARGETDIR)/tpImplicite
-  OBJDIR = obj/debug/tpImplicite
+  OBJDIR = obj/debug
   DEFINES += -DDEBUG
   INCLUDES += -I. -Isrc/gKit
   FORCE_INCLUDE +=
@@ -41,7 +41,7 @@ ifeq ($(config),release)
   RESCOMP = windres
   TARGETDIR = bin
   TARGET = $(TARGETDIR)/tpImplicite
-  OBJDIR = obj/release/tpImplicite
+  OBJDIR = obj/release
   DEFINES +=
   INCLUDES += -I. -Isrc/gKit
   FORCE_INCLUDE +=
