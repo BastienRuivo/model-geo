@@ -19,6 +19,16 @@ Box généré à la main. Mais peut prendre jusqu’à deux secondes sans Boundi
 - Une simple classe qui stock une grille de point en 2D
 - Chaque grille est sa propre courbe et est ensuite utiliser pour mailler des surfaces de bézier / révolution
 
+## Librairies
+
+- Imgui est utilisé pour l'UI, afin de pouvoir facilement choisir les formes a appliquer et sculpter la SDF.
+- BOOST est utilisé pour sérializer l'arbre SDF afin de pouvoir la reprendre plus tard, faire des sauvegardes, revenir en arrière etc.
+
+```
+sudo apt-get install libboost-all-dev
+sudo apt-get install libimgui-dev
+```
+
 J'ai fait le tp sous une branche local de gkit, j'ai du copier les fichiers sur se repo du coup
 
 Vous trouverez les tps dans projets -> tpImplicite
