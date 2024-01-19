@@ -128,7 +128,7 @@ void main( )
             color= vec4(0.8, 0.4, 0, 1);
     }
     
-    color.rgb= color.rgb * cos_theta;
+    color.rgb= color.rgb;
 #endif
     
     fragment_color= color;

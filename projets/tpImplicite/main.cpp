@@ -176,61 +176,12 @@ public:
 
         
 
-        std::vector<std::vector<Point>> pointVase {
-            {Point(0, 0, 0), Point(0.1, 0.0, 0.0), Point(0.15, 0.0, 0.0), Point(0.2, 0.1, 0.0), Point(0.3, 0.6, 0.0), Point(0.2, 0.7, 0.0), Point(0.1, 0.7, 0.0), Point(0.1, 0.9, 0.0), Point(0.25, 0.95, 0.0)}
-        };
-        vase = Bezier(pointVase);
-        Revolution vaseRev(vase, Vector(0, 1, 0));
-
-        FastNoiseLite noise;
-        noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
-        noise.SetFrequency(2.f);
-        noise.SetSeed(1337);
-        std::vector<std::vector<Point>> pointSurface;
-        int resnoise = 32;
-        for (size_t i = 0; i < resnoise; i++)
-        {
-            pointSurface.push_back(std::vector<Point>());
-            for (size_t j = 0; j < resnoise; j++)
-            {
-                float x = i / (float)resnoise;
-                float z = j / (float)resnoise;
-                float y = (noise.GetNoise(x, z) + 1) * 0.5;
-                Point p = Point(x, y, z);
-                pointSurface[i].push_back(Point(x, y, z));
-            }
-            
-        }
-
-        bezier = Bezier(pointSurface);
-        int res = 4;
-        // for (size_t i = 0; i < 8; i++)
-        // {
-            
-        //     std::cout<<"Polygonizing res = " << res * (i + 1)<<std::endl;
-        //     m_Beziers.push_back(bezier.polygonize((i+1) * res));
-        //     m_Revolutions.push_back(vaseRev.polygonize((i+1) * res));
-        // }
-        // std::cout<<"Polygonizing done"<<std::endl;
-
-        for (size_t i = 0; i < 4; i++)
-        {
-            m_Beziers.push_back(GlobalDeformation::TorsionHelicoidal::Warp(m_implicit, 1, 1.0 * (i + 1)));
-        }
+      
         
         
         
 
         srand(time(NULL));
-
-
-        std::cout<< "Getting lines mesh"<<std::endl;
-        lines_bezier.clear();
-        lines_revolution.clear();
-        bezier.getLinesMesh(lines_bezier);
-        vase.getLinesMesh(lines_revolution);
-        std::cout<< "Getting lines mesh done"<<std::endl;
-
 
         
         // etat openGL par defaut
@@ -383,9 +334,9 @@ public:
     void doUI() {
         ImGui_ImplSdlGL3_NewFrame(m_window);
 
-        //doImplicitUi();
-        //doRaycastUi();
-        doBezierUi();
+        doImplicitUi();
+        doRaycastUi();
+        //doBezierUi();
         ImGui::Render();
         ImGui_ImplSdlGL3_RenderDrawData(ImGui::GetDrawData());
     }
@@ -517,32 +468,10 @@ public:
         // Dessinne le repere et la lumiere
         //draw(m_repere, /* model */ Identity(), camera());
 
-        //draw(m_implicit, /* model */ Identity(), camera());
+        draw(m_implicit, /* model */ Identity(), camera());
         //draw(m_implicit_deformed, Translation(Vector(m_Beziers.size() + 1.5, 0, -1)), camera());
 
 
-        
-        for (int i = 0; i < m_Beziers.size(); i++)
-        {
-            float x = m_Beziers.size() * 2 - i * 2;
-            draw(m_Beziers[i], /* model */ Translation(Vector(x, 0, 0)), camera());
-            if(drawLines && i == m_Beziers.size() - 1) {
-                for (auto & line : lines_bezier) {
-                    draw(line, /* model */ Translation(Vector(x, 0, 0)), camera());
-                }
-            }
-        }
-
-        for (int i = 0; i < m_Revolutions.size(); i++)
-        {
-            float x = m_Revolutions.size() * 2 - i * 2;
-            draw(m_Revolutions[i], /* model */ Translation(Vector(x, 0, 2.5)), camera());
-            if(drawLines && i == m_Revolutions.size() - 1) {
-                for (auto & line : lines_revolution) {
-                    draw(line, /* model */ Translation(Vector(x, 0, 2.5)), camera());
-                }
-            }
-        }
         
 
         for (auto & ray : m_rays) {
