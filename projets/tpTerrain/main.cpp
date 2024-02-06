@@ -12,10 +12,9 @@
 
 #include "HeightField.h"
 
-#include "FastNoiseLite.h"
 
 #include <random>
-
+#include <chrono>
 Mesh make_grid( const int n= 10 )
 {
     Mesh grid= Mesh(GL_LINES);
@@ -86,11 +85,19 @@ public:
         noiser.SetFractalOctaves(2);
         noiser.SetFractalLacunarity(2.0);
         noiser.SetFractalGain(0.5);
+        noiser.SetFrequency(0.04);
+
+        angleNoiser.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+        angleNoiser.SetFractalType(FastNoiseLite::FractalType_FBm);
+        angleNoiser.SetFractalOctaves(2);
+        angleNoiser.SetFractalLacunarity(2.0);
+        angleNoiser.SetFractalGain(0.5);
+        angleNoiser.SetFrequency(0.02);
 
 
         // decrire un repere / grille 
-        tw = 1024;
-        th = 1024;
+        tw = 256;
+        th = 256;
         m_terrain = HeightField(Point(0, 0, 0), Point(10, 1.0, 10), tw, th);
 
         m_program = read_program("data/shaders/mesh.glsl");
@@ -102,16 +109,19 @@ public:
         {
             for (size_t j = 0; j < m_terrain.getHeight(); j++)
             {
-                double x = (double)i / (double)m_terrain.getWidth();
-                double y = (double)j / (double)m_terrain.getHeight();
-                double value = noiser.GetNoise(x * tw, y * th);
-                // clamp value between 0 and 1
-                value = (value + 1) * 0.5;
-                m_terrain(i, j) = value;
+                // double value = noiser.GetNoise(float(i) + 500, float(j) + 500);
+                // m_terrain(i, j) = value * 0.5 + 0.5;
+
+                if(i >= m_terrain.getWidth() / 4 && i <= m_terrain.getWidth() * 3 / 4 && j >= m_terrain.getHeight() / 4 && j <= m_terrain.getHeight() * 3 / 4) {
+                    m_terrain(i, j) = 1.0;
+                }
+                else {
+                    m_terrain(i, j) = 0.0;
+                }
             }
         }
+        //m_terrain.loadFromFile("data/terrain/world.png", Point(0, 0, 0), Point(10, 1.0, 10));
 
-        //m_terrain.loadFromFile("data/terrain/heightmap.png", Point(0, 0, 0), Point(10, 2.5, 10));
 
         ImageData img = m_terrain.toImage();
         
@@ -207,7 +217,7 @@ public:
         // start a frame
         if(ImGui::Button("Img To Terrain")) {
             m_terrain.UpdateFromImage(m_img);
-            m_terrain.polygonize(256, 256);
+            m_terrain.polygonize(1024, 1024);
         }
         ImGui::SameLine();
         if(ImGui::Button("Terrain to Img")) {
@@ -216,33 +226,92 @@ public:
         }
         ImGui::SameLine();
         if(ImGui::Button("Reset")) {
-            m_terrain.loadFromFile("data/terrain/heightmap.png", Point(0, 0, 0), Point(10, 0.25, 10));
+            for (size_t i = 0; i < m_terrain.getWidth(); i++)
+            {
+                for (size_t j = 0; j < m_terrain.getHeight(); j++)
+                {
+                    double value = noiser.GetNoise(float(i) + 500, float(j) + 500);
+                    m_terrain(i, j) = value * 0.5 + 0.5;
+
+                    // if(i >= m_terrain.getWidth() / 4 && i <= m_terrain.getWidth() * 3 / 4 && j >= m_terrain.getHeight() / 4 && j <= m_terrain.getHeight() * 3 / 4) {
+                    //     m_terrain(i, j) = 1.0;
+                    // }
+                    // else {
+                    //     m_terrain(i, j) = 0.0;
+                    // }
+                }
+            }
             m_terrain.polygonize(tw, th);
         }
         if(ImGui::Button("Slope")) {
-            m_img = m_terrain.Slope(tw, th);
+            m_img = m_terrain.Slope();
             updateImage();
         }
         ImGui::SameLine();
         if(ImGui::Button("Gradient Magnitude")) {
-            m_img = m_terrain.GradientMagnitude(tw, th);
+            m_img = m_terrain.GradientMagnitude();
             updateImage();
         }
         ImGui::SameLine();
         if(ImGui::Button("Laplacian")) {
-            m_img = m_terrain.Laplacian(tw, th);
+            m_img = m_terrain.Laplacian();
             updateImage();
         }
         ImGui::SameLine();
         if(ImGui::Button("Accessible")) {
-            m_img = m_terrain.Accessible(tw, th);
+            m_img = m_terrain.Accessible();
             updateImage();
         }
         ImGui::SameLine();
         if(ImGui::Button("Normal Color")) {
-            m_img = m_terrain.NormalColor(tw, th);
+            m_img = m_terrain.NormalColor();
             updateImage();
         }
+
+        if(ImGui::Button("Save To png")) {
+            write_image_data(m_img, "data/terrain/mymap.png");
+        }
+        ImGui::InputFloat("Pi Divider", &pi_divider);
+        ImGui::SameLine();
+        if(ImGui::Button("Apply")) {
+            int it = 1000;
+            auto now = std::chrono::system_clock::now();
+            for (size_t i = 0; i < it; i++)
+            {
+                m_terrain.thermalErosion(M_PI / pi_divider, angleNoiser);
+            }
+            auto end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end - now;
+            std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+            m_terrain.polygonize(tw, th);
+            m_img = m_terrain.toImage();
+            updateImage();
+        }
+        if(ImGui::Button("Streampower Erosion")) {
+            int it = 10000;
+            auto now = std::chrono::system_clock::now();
+            for (size_t i = 0; i < it; i++)
+            {
+                m_terrain.StreamErosion();
+            }
+            auto end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end - now;
+            std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+            m_terrain.polygonize(tw, th);
+            m_img = m_terrain.toImage();
+            updateImage();
+        }
+        if(ImGui::Button("Humidity")) {
+            m_img = m_terrain.Humidity();
+            updateImage();
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Stream Area")) {
+            m_img = m_terrain.StreamAreaImg();
+            updateImage();
+        }
+            
+            
         ImGui::Image((void*)(intptr_t)m_texture, ImVec2(512, 512));
         ImGui::End();
 
@@ -296,7 +365,10 @@ protected:
 
     ImGuiIO io;
 
+    float pi_divider = 4.0;
+
     FastNoiseLite noiser;
+    FastNoiseLite angleNoiser;
 
     // default random engine
     std::default_random_engine generator;

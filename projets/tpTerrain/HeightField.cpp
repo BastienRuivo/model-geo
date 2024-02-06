@@ -42,7 +42,7 @@ double HeightField::Height(double x, double z) const {
     return Height(Point(x, 0.0, z));
 }
 
-ImageData HeightField::NormalColor(int sampleWidth, int sampleHeight) const {
+ImageData HeightField::NormalColor() const {
     ImageData img(width, height, 3);
     for(int i = 0; i < width; i++) {
         for(int j = 0; j < height; j++) {
@@ -79,7 +79,7 @@ double HeightField::AverageSlope(int x, int z) const {
     return sum / nb;
 }
 
-ImageData HeightField::Slope(int sampleWidth, int sampleHeight) const {
+ImageData HeightField::Slope() const {
     std::vector<float> slopes(width * height);
     float maxSlope = std::numeric_limits<float>::min();
     float minSlope = std::numeric_limits<float>::max();
@@ -110,63 +110,99 @@ ImageData HeightField::Slope(int sampleWidth, int sampleHeight) const {
 }
 
 float HeightField::laplacian(int i, int j) const {
-    float h = gradient(i, j).y;
-    float dx, dz;
-    dx = dz = 0;
-    int sumx, sumz;
-    sumx = sumz = 0;
+    float up, down, left, right, center;
+
+
+    center = (*this)(i, j);
 
     if(i > 0) {
-        dx += gradient(i - 1, j).y - h;
-        sumx++;
+        left = (*this)(i - 1, j);
+    } else {
+        left = center;
     }
 
     if(i < width - 1) {
-        dx += gradient(i + 1, j).y - h;
-        sumx++;
+        right = (*this)(i + 1, j);
+    } else {
+        right = center;
     }
 
     if(j > 0) {
-        dz += gradient(i, j - 1).y - h;
-        sumz++;
+        down = (*this)(i, j - 1);
+    } else {
+        down = center;
     }
 
     if(j < height - 1) {
-        dz += gradient(i, j + 1).y - h;
-        sumz++;
+        up = (*this)(i, j + 1);
+    } else {
+        up = center;
     }
 
-    return (dx / sumx + dz / sumz) / 2;
+    float dx = (pMax.x - pMin.x) / width;
+    return (right + left + up + down - 4 * center) / (dx * dx);
 }
 
 
-ImageData HeightField::Laplacian(int sampleWidth, int sampleHeight) const {
-    std::vector<float> res(sampleWidth * sampleHeight);
+ImageData HeightField::Laplacian() const {
+    std::vector<float> res(width * height);
     float maxLaplacian = std::numeric_limits<float>::min();
     float minLaplacian = std::numeric_limits<float>::max();
-    for (int i = 0; i < sampleWidth; i++)
+    for (int i = 0; i < width; i++)
     {
-        for (int j = 0; j < sampleHeight; j++) {
-            res[i + j * sampleWidth] = laplacian(i, j);
-            minLaplacian = std::min(minLaplacian, res[i + j * sampleWidth]);
-            maxLaplacian = std::max(maxLaplacian, res[i + j * sampleWidth]);
+        for (int j = 0; j < height; j++) {
+            int x = (i / (float)width) * width;
+            int z = (j / (float)height) * height;
+            res[i + j * width] = laplacian(i, j);
+            minLaplacian = std::min(minLaplacian, res[i + j * width]);
+            maxLaplacian = std::max(maxLaplacian, res[i + j * width]);
         }
     }
 
-    ImageData img(sampleWidth, sampleHeight, 3);
-    for (int i = 0; i < sampleWidth * sampleHeight; i++)
+    ImageData img(width, height, 3);
+    for (int i = 0; i < width * height; i++)
     {
         // calmp res to [0, 1]
         img.pixels[i * 3 + 0] = 255 - (res[i] - minLaplacian) / (maxLaplacian - minLaplacian) * 255;
-        img.pixels[i * 3 + 1] = 255 - (res[i] - minLaplacian) / (maxLaplacian - minLaplacian) * 255;
-        img.pixels[i * 3 + 2] = 255 - (res[i] - minLaplacian) / (maxLaplacian - minLaplacian) * 255;
+        img.pixels[i * 3 + 1] = (res[i] - minLaplacian) / (maxLaplacian - minLaplacian) * 255;
+        img.pixels[i * 3 + 2] = 0;
     }
 
     std::cout<<"DONE res"<<std::endl;
     return img;
 }
 
-ImageData HeightField::GradientMagnitude(int sampleWidth, int sampleHeight) const {
+ImageData HeightField::Humidity() const {
+    std::vector<float> res(width * height);
+    float maxHumidity = std::numeric_limits<float>::min();
+    float minHumidity = std::numeric_limits<float>::max();
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++) {
+            int x = (i / (float)width) * width;
+            int z = (j / (float)height) * height;
+
+            
+            res[i + j * width] = log(accesibility(Vertex(x, z, width, height)) / AverageSlope(x, z));
+            minHumidity = std::min(minHumidity, res[i + j * width]);
+            maxHumidity = std::max(maxHumidity, res[i + j * width]);
+        }
+    }
+
+    ImageData img(width, height, 3);
+    for (int i = 0; i < width * height; i++)
+    {
+        // calmp res to [0, 1]
+        img.pixels[i * 3 + 0] = 255 - (res[i] - minHumidity) / (maxHumidity - minHumidity) * 255;
+        img.pixels[i * 3 + 1] = 255 - (res[i] - minHumidity) / (maxHumidity - minHumidity) * 255;
+        img.pixels[i * 3 + 2] = 255;
+    }
+
+    std::cout<<"DONE res"<<std::endl;
+    return img;
+}
+
+ImageData HeightField::GradientMagnitude() const {
     ImageData img(width, height, 3);
     Vector min = Vector(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
     Vector max = Vector(std::numeric_limits<float>::min(), std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
@@ -197,7 +233,7 @@ ImageData HeightField::GradientMagnitude(int sampleWidth, int sampleHeight) cons
     return img;
 }
 
-float HeightField::skyViewFixed(const Point & p) {
+float HeightField::skyViewFixed(const Point & p) const {
     float nbSky = 0;
     for(size_t i = 0; i < pointsOnHemisphere.size(); i++) {
         Ray ray(p, normalize(Vector(pointsOnHemisphere[i])));
@@ -211,7 +247,7 @@ float HeightField::skyViewFixed(const Point & p) {
     return r;
 }
 
-float HeightField::accesibility(const Point & p) {
+float HeightField::accesibility(const Point & p) const {
     float nbSky = 0;
     //lines.clear();
     Vector N = Normal(p.x, p.z, width, height);
@@ -227,25 +263,9 @@ float HeightField::accesibility(const Point & p) {
         //Vector dirOnHemi = coordOnHemi.x * T + coordOnHemi.y * N + coordOnHemi.z * B;
         Ray ray(p, normalize(dirOnHemi));
         float t;
-        if(printLine) 
-        {
-            Mesh line = Mesh(GL_LINES);
-            if(!spheretrace(ray, t)) {
-                nbSky = nbSky + 1.f;
-                line.color(0, 1, 0);
-            } 
-            else {
-                line.color(1, 0, 0);
-            }
-            line.vertex(p);
-            line.vertex(ray(t));
-            lines.push_back(line);
-        } else  {
-            if(!spheretrace(ray, t)) {
-                nbSky = nbSky + 1.f;
-            }
+        if(!spheretrace(ray, t)) {
+            nbSky = nbSky + 1.f;
         }
-        
     }
     return nbSky / pointsOnHemisphere.size();
 }
@@ -273,19 +293,19 @@ bool HeightField::spheretrace(const Ray & ray, float & t) const {
     return false;
 }
 
-ImageData HeightField::Accessible(int sampleWidth, int sampleHeight) {
-    ImageData img(sampleWidth, sampleHeight, 3);
+ImageData HeightField::Accessible() {
+    ImageData img(width, height, 3);
     auto now = std::chrono::system_clock::now();
     lines.clear();
     #pragma omp parallel for
-    for(int i = 0; i < sampleWidth; i++) {
-        //printf("%d / %d\n", (i + 1), sampleWidth);
-        for(int j = 0; j < sampleHeight; j++) {
-            Point p = Vertex(i, j, sampleWidth, sampleHeight);
+    for(int i = 0; i < width; i++) {
+        //printf("%d / %d\n", (i + 1), width);
+        for(int j = 0; j < height; j++) {
+            Point p = Vertex(i, j, width, height);
             float sky = accesibility(p);
-            img.pixels[(i + j * sampleWidth) * 3 + 0] = sky * 255;
-            img.pixels[(i + j * sampleWidth) * 3 + 1] = sky * 255;
-            img.pixels[(i + j * sampleWidth) * 3 + 2] = sky * 255;
+            img.pixels[(i + j * width) * 3 + 0] = sky * 255;
+            img.pixels[(i + j * width) * 3 + 1] = sky * 255;
+            img.pixels[(i + j * width) * 3 + 2] = sky * 255;
         }
     }
     auto end = std::chrono::system_clock::now();
